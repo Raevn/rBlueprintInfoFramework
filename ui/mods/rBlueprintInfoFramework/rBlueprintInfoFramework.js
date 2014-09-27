@@ -202,8 +202,11 @@ bif.doUnitBlueprint = function(currentUnitPath, currentUnitID) {
 		if (bif.units[currentUnitID].unit_types != null) {
 			bif.units[currentUnitID].unit_types.push("UNITTYPE__" + currentUnitID);
 		}
+		locAddNamespace('units');
 		bif.units[currentUnitID].id = currentUnitID;
 		bif.units[currentUnitID].path = currentUnitPath;
+		bif.units[currentUnitID].description = loc(bif.units[currentUnitID].description);
+		bif.units[currentUnitID].display_name = loc(bif.units[currentUnitID].display_name);
 		bif.units[currentUnitID].buildIndex = "" + (999 - bif.units[currentUnitID].display_group) + "" + (999 - bif.units[currentUnitID].display_index);
 		
 		var iconName = bif.units[currentUnitID].si_name ? bif.units[currentUnitID].si_name : currentUnitID;
@@ -300,9 +303,12 @@ bif.doToolBlueprint = function(currentToolPath, currentToolID) {
 bif.doAmmoBlueprint = function(currentAmmoPath, currentAmmoID) { 
 	$.getJSON("coui:/" + currentAmmoPath, function (data) {
 		
+		locAddNamespace('units');
 		bif.ammo[currentAmmoID] = bif.loadBlueprintInfoRecursive(data, currentAmmoID, "ammo");
 		bif.ammo[currentAmmoID].id = currentAmmoID;
 		bif.ammo[currentAmmoID].path = currentAmmoPath;
+		bif.ammo[currentAmmoID].description = loc(bif.ammo[currentAmmoID].description);
+		bif.ammo[currentAmmoID].display_name = loc(bif.ammo[currentAmmoID].display_name);
 		bif.ammo[currentAmmoID].inherited = [];
 		bif.loaded_ammo(bif.loaded_ammo() + 1);
 
